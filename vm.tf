@@ -1,12 +1,14 @@
 resource digitalocean_droplet exit_node {
   name    = "do-cloud-exit-node"
-  image   = "ubuntu-22-04-x64"
+  image   = "ubuntu-24-04-x64"
   region  = "nyc3"
   size    = "s-1vcpu-1gb"
 
   user_data = templatefile("${path.module}/cloud-init.yaml", {
     # tailscale_auth_key = var.tailscale_auth_key
     tailscale_auth_key = tailscale_tailnet_key.exit_node.key
+    ssh_public_key    = var.ssh_public_key
+    vm_username       = var.vm_username
   })
 }
 
