@@ -1,0 +1,22 @@
+{
+    local_certs
+    skip_install_trust
+    order coraza_waf first
+    admin :2019
+}
+
+localhost {
+    coraza_waf {
+        load_owasp_crs
+        directives `
+		    Include @coraza.conf-recommended
+		    Include @crs-setup.conf.example
+            Include @owasp_crs/*.conf
+            SecRuleEngine On
+        `
+    }
+
+    reverse_proxy {
+        to {$TARGET_HOST}
+    }
+}
