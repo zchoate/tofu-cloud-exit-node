@@ -12,4 +12,5 @@ services:
     env_file:
       - .env
     volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./caddy/sites:/config/caddy/sites
