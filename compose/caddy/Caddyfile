@@ -1,1 +1,8 @@
+{
+    local_certs
+    skip_install_trust
+    order coraza_waf first
+    admin :2019
+}
+
 import /config/caddy/sites/*
